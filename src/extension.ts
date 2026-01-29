@@ -68,18 +68,15 @@ export function activate(context: vscode.ExtensionContext) {
 			{ location: vscode.ProgressLocation.SourceControl, title: '生成提交信息...', cancellable: false },
 			async () => {
 				try {
-					outputChannel.show(true);
 					const { stdout, stderr } = await runCommand(command, repoRoot, outputChannel);
 					if (stderr) {
 						outputChannel.appendLine('[stderr]');
 						outputChannel.appendLine(stderr.trim());
-						outputChannel.show(true);
 					}
 
 					if (stdout) {
 						outputChannel.appendLine('[stdout]');
 						outputChannel.appendLine(stdout.trim());
-						outputChannel.show(true);
 					}
 
 					const message = stdout.trim();
